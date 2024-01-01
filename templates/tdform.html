@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    form {
+        margin: 30px auto;
+        padding: 20px;
+        background-color: #b9a995;
+        border-radius: 10px;
+        width: 400px;
+    }
+    label {
+        display: block;
+        margin-bottom: 10px;
+        color: black;
+    }
+    select,input{
+        width: 90%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 1px;
+        border: 1px solid #776B5D;
+    }
+
+    button[type="submit"] {
+        background-color: #776B5D;
+        color: #f2f2f2;
+        padding: 10px 20px;
+        font-size: 14px;
+        border: none;
+        border-radius: 1px;
+        cursor: pointer;
+    }
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+</style>
+<h1>Add Transaction</h1>
+<div class="msg">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="flashes">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+</div>
+<form action="{{ url_for('checkmed',tranid=tranid)}}" method="post">
+    
+    <label for="Tranid">Tranid:</label>
+    <input type="number" id="Tranid" name="Tranid" value="{{tranid}}"readonly>
+    <br><br>
+
+   <label for="Medid">Choose a Medicine:</label>
+    <select id="Medid" name="Medid">
+        {% for m in medlist %}
+        <option value="{{m.Medid}}">{{m.MedName}}</option>
+        {% endfor %}
+    </select>
+    <br><br>
+    <label for="Medunits">Medicine Units:</label>
+    <input type="number" id="Medunits" name="Medunits" min="1" value="1" required>
+    <br><br>
+
+    <input type="submit" value="Check">
+</form>
+<!--
+<form action="{{ url_for('checkmed')}}" method="post">
+    <div id="extendedForm" style="display: none;">
+        <label for="DocName">Doctor Name:</label>
+        <input type="text" id="DocName" name="DocName" required>
+        <br><br>
+
+        <label for="Dosage">Dosage:</label>
+        <input type="text" id="Dosage" name="Dosage" required>
+        <br><br>
+
+    </div>
+    <input type="submit" value="Add Transaction">
+</form>
+-->
+<a class="btn" href="{{url_for('billingform')}}">Another Customer </a>
+
+{% endblock %}

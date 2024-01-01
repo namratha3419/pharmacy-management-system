@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Add Stock</h1>
+    <div class="msg">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class="flashes">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+    </div>
+    <form class="form-container" action="{{ url_for('addstock')}}" method="post">
+    <label for="Medid">Choose a Medicine:</label>
+    <select id="Medid" name="Medid">
+        {% for m in medlist %}
+        <option value="{{m.Medid}}">{{m.MedName}}</option>
+        {% endfor %}
+    </select>
+    <br><br>
+    <label for="Suplid">Choose a supplier:</label>
+    <select id="Suplid" name="Suplid">
+        {% for s in suplist %}
+        <option value="{{ s.Suplid }}">{{s.SuplName}}</option>
+        {% endfor %}
+    </select>
+    <br><br>
+
+    <label for="StockQty">Quantity:</label>
+    <input type="number" id="StockQty" name="StockQty" min="1" value="1">
+    <br><br>
+
+    <label for="StockExpYear">Year:</label>
+    <input type="number" id="StockExpYear" name="StockExpYear" min="2023" value="2023">
+    <br><br>
+
+    <label for="StockExpMonth">Month:</label>
+    <input type="number" id="StockExpMonth" name="StockExpMonth" min="1" max="12" value="1">
+    <br><br>
+
+    <input type="submit" value="Add Stock">
+  </form>
+  
+{% endblock %}

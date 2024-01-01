@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+					<h1>Your Details</h1> </br>
+						<div class="border">
+							<table class="worddark"></br></br></br></br>
+								<tr>
+									<td>Empid:</td>
+									<td>{{ account['Empid'] }}</td>
+								</tr>
+								<tr>
+									<td>Password:</td>
+									<td>{{ account['password'] }}</td>
+								</tr>
+								<tr>
+									<td>Email ID:</td>
+									<td>{{ account['email'] }}</td>
+								</tr>
+													 
+							</table>
+						</div>
+{% endblock %}									 

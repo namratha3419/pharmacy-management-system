@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    form {
+        margin: 30px auto;
+        padding: 20px;
+        background-color: #b9a995;
+        border-radius: 10px;
+        width: 400px;
+    }
+    label {
+        display: block;
+        margin-bottom: 10px;
+        color: black;
+    }
+    select,input{
+        width: 90%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 1px;
+        border: 1px solid #776B5D;
+    }
+
+    button[type="submit"] {
+        background-color: #776B5D;
+        color: #f2f2f2;
+        padding: 10px 20px;
+        font-size: 14px;
+        border: none;
+        border-radius: 1px;
+        cursor: pointer;
+    }
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+</style>
+<h1>Add Transaction</h1>
+<div class="msg">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="flashes">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+</div>
+
+{% if pres==1 %}
+<form action="{{ url_for('inserttdpres') }}" method="post">
+        <label for="tranid">Tranid:</label>
+        <input type="number" id="tranid" name="tranid" value="{{tranid}}"readonly>
+        <br><br>
+        <label for="medid">Medicine id:</label>
+        <input type="number" id="medid" name="medid" min="1" value="{{medid}}" readonly>
+        <br><br>
+        <label for="medunits">Medicine Units:</label>
+        <input type="number" id="medunits" name="medunits" min="1" value="{{medunits}}" readonly>
+        <br><br>
+        <label for="DocName">Doctor Name:</label>
+        <input type="text" id="DocName" name="DocName" required>
+        <br><br>
+        <label for="Dosage">Dosage:</label>
+        <input type="text" id="Dosage" name="Dosage" required>
+        <br><br>
+    <input type="submit" value="Add Transaction">
+</form>
+{% else %}
+<form action="{{ url_for('inserttd')}}" method="post">
+        <label for="tranid">Tranid:</label>
+        <input type="number" id="tranid" name="tranid" value="{{tranid}}"readonly>
+        <br><br>
+        <label for="medid">Medicine:</label>
+        <input type="text" id="medid" name="medid" min="1" value="{{medid}}" readonly>
+        <br><br>
+        <label for="medunits">Medicine Units:</label>
+        <input type="number" id="medunits" name="medunits" min="1" value="{{medunits}}" readonly>
+        <br><br>
+
+        <label for="prescid">No prescription required</label>
+        <input type="text" id="prescid" name="prescid" value="NULL" readonly>
+        <br><br>
+
+    <input type="submit" value="Add Transaction">
+</form>
+{% endif %}
+
+{% endblock %}

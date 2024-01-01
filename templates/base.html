@@ -1,0 +1,40 @@
+<!--Store this code in 'index.html' file inside the 'templates' folder-->
+<html lang="en">
+	<head>
+		<title>index</title>
+		<link rel="stylesheet" href="../static/style.css">
+	</head>
+
+	<body bgcolor="#F4EAE0">
+		<div class="one">
+			<div class="two">
+				<h1>Curify</h1>
+				<ul>
+					<li><a href="{{url_for('billingform')}}">Billing</a></li>
+					<li><a href="{{url_for('transactionview')}}">Transaction History</a></li>
+                    <li><a href="{{url_for('display_med')}}">Display Medicines</a></li>
+					<li><a href="{{url_for('stock')}}">Stocks</a></li>
+					<li><a href="{{url_for('supplier')}}">Suppliers</a></li>
+
+					
+
+				</ul>
+			</div>
+			<div class="content" align="center">
+				<div class="topbar">
+                    <ul>
+                        <li><a href="{{url_for('logout')}}">Log out</a></li>
+                        <li><a href="{{url_for('update')}}">Update Account</a></li>
+                        <li><a href="{{url_for('display')}}">Account</a></li>
+                        <li><a href="{{url_for('index')}}">Index</a></li>
+                      </ul>				 
+				</div></br></br>
+				<div class="contentbar">
+                    {% block content %}
+
+                    {% endblock %}
+				</div>			
+			</div>
+		</div>
+	</body>
+</html>

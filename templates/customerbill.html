@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Bill</h1>
+<!-- <div class="search">
+  <form action="{{url_for('search_med')}}" method="post" autocomplete="off">
+    <input type="text" name="MedName" placeholder="Enter Medicine Name" class="searchbox" id="MedName" required>
+    <input type="submit" class="btn" value="Search">
+  </form>
+</div>-->
+</br></br>
+<table>
+<table>
+  <tbody>
+      <tr>
+          <th>Transaction No:</th>
+          <td>{{transactionview.Tranid}}</td>
+          <th>Transaction Date:</th>
+          <td>{{transactionview.TranDate}}</td>
+      </tr>
+      <tr>
+          <th>Customer Name:</th>
+          <td>{{transactionview.CustName}}</td>
+          <th>Customer Phone:</th>
+          <td>{{transactionview.CustPh}}</td>
+      </tr>
+    </tbody>
+  </table>
+</br></br>
+  <table>
+    <tbody>
+      <h3>Prescription details:</h3>
+          {% for p in prescriptionview %}
+          <tr>
+              <th>Medicine Name:</th>
+              <td>{{p.MedName}}</td>  
+              <th>Doctor Name:</th>
+              <td>{{p.DocName}}</td> 
+          </tr>
+          <tr>  
+              <th>Dosage:</th>
+              <td>{{p.Dosage}}</td> 
+          </tr>
+          {% endfor %}
+  </tbody>
+</table>
+
+</br></br>
+<table>
+    <tr>
+      <th>Transaction id</th>
+      <th>Medicine Name</th> 
+      <th>Prescription Status</th>
+      <th>Units</th>
+      <th>Price=units*Medicine price</th>
+    </tr>
+
+    {% for t in transactiondetails %}
+    <tr>
+        <th>{{t.Tranid}}</th>
+        <th>{{t.MedName}}</th>
+        {% if t.Prescription=='Not Required' %}
+        <th>{{t.Prescription}}</th>
+        {% else %}
+        <th>Verified</th>
+        {% endif %}
+        <th>{{t.Medunits}}</th>
+        <th>{{t.MedTcost}}</th>     
+    </tr>
+    {% endfor %}
+
+    <tr>
+      <th></th>
+      <th></th> 
+      <th></th>
+      <th>Total :</th>
+      <th>{{transactionview.TotalAmt}}</th>
+    </tr>
+  </table>
+</br></br>
+  <a class="btn" href="{{url_for('printbill',tranid=transactionview.Tranid)}}">Print bill</a>
+
+
+  {% endblock %}

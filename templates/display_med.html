@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Medicines List</h1> </br>
+<div class="msg">{{ msg }}</div>
+<div class="msg">
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <ul class="flashes">
+  {% for message in messages %}
+      <li>{{ message }}</li>
+  {% endfor %}
+  </ul>
+  {% endif %}
+  {% endwith %}
+</div>
+<div class="search">
+  <form action="{{url_for('search_med')}}" method="post" autocomplete="off">
+    <input type="text" name="MedName" placeholder="Enter Medicine Name" class="searchbox" id="MedName" required>
+    <input type="submit" class="btn" value="Search">
+  </form>
+</div>
+</br></br></br>
+			
+<table>
+    <tr>
+      <th>Medid</th>
+      <th>MedName</th> 
+      <th>MedDesc</th>
+      <th>MedQty</th>
+      <th>MedPrice</th>
+      <th>Prescription</th>
+      <th>operations</th>
+    </tr>
+    {% if found_meds %}
+    <!-- <h2>Search Result</h2> -->
+    {% for med in found_meds %}
+    <tr>
+        <th>{{med.Medid}}</th>
+        <th>{{med.MedName}}</th>
+        <th>{{med.MedDesc}}</th>
+        <th>{{med.MedQty}}</th>
+        <th>{{med.MedPrice}}</th>
+        {% if med.PresReq==0 %}
+        <th>Not Required</th>
+        {% else %}
+        <th>Required</th>
+        {% endif %}
+        <th><a href="{{url_for('deletemed', medid=med.Medid)}}">Delete</a> | <a href="{{url_for('updatemedform', medid=med.Medid)}}">Update</a></th>
+    </tr>
+    {% endfor %}
+    {% endif %}
+
+    {% for med in medicines %}
+    <tr>
+        <th>{{med.Medid}}</th>
+        <th>{{med.MedName}}</th>
+        <th>{{med.MedDesc}}</th>
+        <th>{{med.MedQty}}</th>
+        <th>{{med.MedPrice}}</th>
+        {% if med.PresReq==0 %}
+        <th>Not Required</th>
+        {% else %}
+        <th>Required</th>
+        {% endif %}
+        <th><a href="{{url_for('deletemed', medid=med.Medid)}}">Delete</a> | <a href="{{url_for('updatemedform', medid=med.Medid)}}">Update</a></th>
+    </tr>
+    {% endfor %}
+  </table>
+</br>
+<a class="btn" href="{{url_for('addmedform')}}">Add Medicine</a>
+</br></br>
+{% endblock %}

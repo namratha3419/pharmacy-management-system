@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Stock List</h1> </br>
+<!-- <div class="search">
+  <form action="{{url_for('search_med')}}" method="post" autocomplete="off">
+    <input type="text" name="MedName" placeholder="Enter Medicine Name" class="searchbox" id="MedName" required>
+    <input type="submit" class="btn" value="Search">
+  </form>
+</div>
+</br></br></br> -->
+<div class="msg">{{ msg }}</div>
+</br></br>		
+<table>
+    <tr>
+      <th>Stock id</th>
+      <th>Medicine Name</th> 
+      <th>Supplier Name</th>
+      <th>Stock remaining</th>
+      <th>Expiry Date</th>
+      <th>delete</th>
+    </tr>
+    {% for s in stockview %}
+    <tr class="{% if s.Stockid in expiredstock_ids %}expired{% endif %}">
+        <th>{{s.Stockid}}</th>
+        <th>{{s.MedName}}</th>
+        <th>{{s.SupplierName}}</th>
+        <th>{{s.StockQty}}</th>
+        <th>{{s.Expiry}}</th>
+        <th><a href="{{url_for('deletestock', stockid=s.Stockid)}}">Delete</a></th>
+    </tr>
+    {% endfor %}
+  </table>
+</br>
+
+ <a class="btn" href="{{url_for('addstockform')}}">Add stock</a>
+</br></br>
+{% endblock %}

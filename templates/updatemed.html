@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block content %}
+    <title>Medicine Form</title>
+    <style>
+        form {
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #b9a995;
+            border-radius: 10px;
+            width: 400px;
+        }
+        label {
+            display: block;
+	        margin-bottom: 10px;
+	        color: black;
+        }
+        select,input{
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 1px;
+            border: 1px solid #776B5D;
+        }
+  
+        button[type="submit"] {
+            background-color: #776B5D;
+            color: #f2f2f2;
+            padding: 10px 20px;
+            font-size: 14px;
+            border: none;
+            border-radius: 1px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Medicine Form</h2>
+<div class="msg">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="flashes">
+    {% for message in messages %}
+        <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+</div>
+<form action="{{url_for('updatemed',medid=med.Medid)}}" method="post">
+    <label for="MedName">Medicine Name:</label>
+    <input type="text" id="MedName" name="MedName" value="{{med.MedName}}" required>
+
+    <label for="MedDesc">Description:</label>
+    <textarea id="MedDesc" name="MedDesc" rows="4">{{med.MedDesc}}</textarea>
+    </br></br>
+    <label for="MedQty">Quantity:</label>
+    <input type="text" id="MedQty" name="MedQty" value="{{med.MedQty}}" required>
+
+    <label for="MedPrice">Price:</label>
+    <input type="number" id="MedPrice" name="MedPrice" step="0.01" value="{{med.MedPrice}}" required>
+
+    <label for="PresReq">Prescription Required:</label>
+    <select id="PresReq" name="PresReq" value="{{med.PresReq}}" required>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+    </select>
+
+    <button type="submit">Update</button>
+</form>
+
+{% endblock %}

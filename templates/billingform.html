@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    form {
+        margin: 30px auto;
+        padding: 20px;
+        background-color: #b9a995;
+        border-radius: 10px;
+        width: 400px;
+    }
+    label {
+        display: block;
+        margin-bottom: 10px;
+        color: black;
+    }
+    select,input{
+        width: 90%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 1px;
+        border: 1px solid #776B5D;
+    }
+
+    button[type="submit"] {
+        background-color: #776B5D;
+        color: #f2f2f2;
+        padding: 10px 20px;
+        font-size: 14px;
+        border: none;
+        border-radius: 1px;
+        cursor: pointer;
+    }
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+</style>
+<h1>Add Transaction</h1>
+<div class="msg">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="flashes">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+</div>
+<form action="{{ url_for('tdform')}}" method="post">
+    <label for="CustName">Customer Name:</label>
+    <input type="text" id="CustName" name="CustName" required>
+    <br><br>
+
+    <label for="CustGender">Customer Gender:</label>
+    <select id="CustGender" name="CustGender">
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+    </select>
+    <br><br>
+
+    <label for="CustPh">Customer Phone:</label>
+    <input type="text" id="CustPh" name="CustPh" required>
+    <br><br>
+
+    <label for="TranDate">Transaction Date:</label>
+    <input type="date" id="TranDate" name="TranDate" required>
+    <br><br>
+
+    <label for="Empid">Employee ID:</label>
+    <select id="Empid" name="Empid">
+        {% for e in Emp %}
+        <option value="{{ e.Empid }}">{{e.Empid}}</option>
+        {% endfor %}
+    </select>
+    <br><br>
+
+    <input type="submit" value="Next">
+</form>
+
+{% endblock %}

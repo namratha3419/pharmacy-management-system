@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Bill</title>
+    <style>
+        body {
+            font-family: "Times New Roman", Times, serif;
+        }
+        h1, h3 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: white;
+        }
+        .total {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1 >Curify</h1>
+    <h3>Address: JSS Science & Technology,Mysore  |  Contact: 8277164689</h3>
+
+<table>
+  <tbody>
+      <tr>
+          <th>Transaction No:</th>
+          <td>{{transactionview.Tranid}}</td>
+          <th>Transaction Date:</th>
+          <td>{{transactionview.TranDate}}</td>
+      </tr>
+      <tr>
+          <th>Customer Name:</th>
+          <td>{{transactionview.CustName}}</td>
+          <th>Customer Phone:</th>
+          <td>{{transactionview.CustPh}}</td>
+      </tr>
+      <!-- Add more rows for additional information -->
+  </tbody>
+</table>
+</br></br>
+<!--<table>
+  <tbody>
+    <h3>Prescription details:</h3>
+        {% for p in prescriptionview %}
+        <tr>
+            <th>Medicine Name:</th>
+            <td>{{p.MedName}}</td>  
+            <th>Doctor Name:</th>
+            <td>{{p.DocName}}</td> 
+        </tr>
+        <tr>  
+            <th>Dosage:</th>
+            <td>{{p.Dosage}}</td> 
+        </tr>
+        {% endfor %}
+</tbody>
+</table>-->
+<table>
+  <tbody>
+    <h3>Prescription details:</h3>
+    <tr>
+      <th>Medicine Name</th>
+      <th>Doctor Name</th>
+      <th>Dosage</th>
+    </tr>
+    {% for p in prescriptionview %}
+    <tr>
+      <td>{{ p[2] }}</td>
+      <td>{{ p[3] }}</td>
+      <td>{{ p[4] }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</br>
+<table>
+    <tr>
+      <th>Transaction id</th>
+      <th>Medicine Name</th> 
+      <th>Prescription</th>
+      <th>Units</th>
+      <th>Price</th>
+    </tr>
+
+    {% for t in transactiondetails %}
+    <tr>
+        <th>{{t.Tranid}}</th>
+        <th>{{t.MedName}}</th>
+        {% if t.Prescription=='Not Required' %}
+        <th>{{t.Prescription}}</th>
+        {% else %}
+        <th></a>Verified</a></th>
+        {% endif %}
+        <th>{{t.Medunits}}</th>
+        <th>{{t.MedTcost}}</th>     
+    </tr>
+    {% endfor %}
+
+    <tr>
+      <th></th>
+      <th></th> 
+      <th></th>
+      <th>Total :</th>
+      <th>{{transactionview.TotalAmt}}</th>
+    </tr>
+  </table>
+
+</body>
+</html>
